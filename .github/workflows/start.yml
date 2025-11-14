@@ -20,16 +20,18 @@ jobs:
 
     steps:
       - name: Checkout repository
+        # pulls your repo code
         uses: actions/checkout@v4
 
       - name: Use Node.js
+        # IMPORTANT: no cache: "npm" here
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        # IMPORTANT: npm install, not npm ci
+        run: npm install
 
       - name: Build React app
         env:
@@ -44,7 +46,7 @@ jobs:
           REACT_APP_SHAREPOINT: ${{ secrets.REACT_APP_SHAREPOINT }}
           REACT_APP_FIRST2PROJECT: ${{ secrets.REACT_APP_FIRST2PROJECT }}
           REACT_APP_IVUE: ${{ secrets.REACT_APP_IVUE }}
-          REACT_APP_HELP_DESK: ${{ secrets.REACT_DESK }}
+          REACT_APP_HELP_DESK: ${{ secrets.REACT_APP_HELP_DESK }}
           REACT_APP_VIRUS_TOTAL: ${{ secrets.REACT_APP_VIRUS_TOTAL }}
           REACT_APP_MIMECAST: ${{ secrets.REACT_APP_MIMECAST }}
         run: npm run build
