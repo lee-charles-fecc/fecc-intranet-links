@@ -1,0 +1,210 @@
+/* Root Variables */
+:root {
+    /* Dark Theme */
+    --dark-bg-primary: #1f2128;
+    --dark-bg-secondary: #292c34;
+    --dark-bg-tertiary: #2f3239;
+    --dark-text-primary: #fffdfd;
+    --dark-text-secondary: #a0a3a8;
+    --dark-text-tertiary: #6e7178;
+    --dark-border: rgba(255, 255, 255, 0.1);
+    --dark-accent: #22833f;
+    --dark-accent-hover: #2ea043;
+
+    /* Light Theme */
+    --light-bg-primary: #ffffff;
+    --light-bg-secondary: #f6f8fa;
+    --light-bg-tertiary: #eef1f4;
+    --light-text-primary: #1f2128;
+    --light-text-secondary: #57606a;
+    --light-text-tertiary: #6e7781;
+    --light-border: rgba(31, 33, 40, 0.12);
+    --light-accent: #1a7f37;
+    --light-accent-hover: #22833f;
+
+    /* Shared */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.app-container {
+    min-height: 100vh;
+    transition: var(--transition);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Dark Theme */
+.theme-dark {
+    background: var(--dark-bg-primary);
+    color: var(--dark-text-primary);
+}
+
+.theme-dark .background-gradient {
+    background: radial-gradient(circle at 20% 20%, rgba(34, 131, 63, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(34, 131, 63, 0.05) 0%, transparent 50%);
+}
+
+/* Light Theme */
+.theme-light {
+    background: var(--light-bg-primary);
+    color: var(--light-text-primary);
+}
+
+.theme-light .background-gradient {
+    background: radial-gradient(circle at 20% 20%, rgba(26, 127, 55, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(26, 127, 55, 0.03) 0%, transparent 50%);
+}
+
+.background-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Loading State */
+.loading-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-spinner {
+    width: 48px;
+    height: 48px;
+    color: var(--dark-accent);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Main Content */
+.main-content {
+    position: relative;
+    z-index: 1;
+    padding: 3rem 2rem;
+}
+
+.content-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Search Section */
+.search-section {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.results-count {
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+.theme-dark .results-count {
+    color: var(--dark-text-secondary);
+}
+
+.theme-light .results-count {
+    color: var(--light-text-secondary);
+}
+
+/* Links Grid */
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+/* No Results */
+.no-results {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.no-results-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.5rem;
+    opacity: 0.3;
+}
+
+.theme-dark .no-results-icon {
+    color: var(--dark-text-secondary);
+}
+
+.theme-light .no-results-icon {
+    color: var(--light-text-secondary);
+}
+
+.no-results h3 {
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.theme-dark .no-results h3 {
+    color: var(--dark-text-primary);
+}
+
+.theme-light .no-results h3 {
+    color: var(--light-text-primary);
+}
+
+.no-results p {
+    margin: 0;
+}
+
+.theme-dark .no-results p {
+    color: var(--dark-text-secondary);
+}
+
+.theme-light .no-results p {
+    color: var(--light-text-secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .links-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 1.5rem 1rem;
+    }
+}

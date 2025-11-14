@@ -1,0 +1,107 @@
+.search-container {
+    position: relative;
+    max-width: 600px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.theme-dark .search-icon {
+    color: var(--dark-text-tertiary);
+}
+
+.theme-light .search-icon {
+    color: var(--light-text-tertiary);
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.875rem 1rem 0.875rem 3rem;
+    border: 1px solid;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.theme-dark .search-input {
+    background: var(--dark-bg-secondary);
+    border-color: var(--dark-border);
+    color: var(--dark-text-primary);
+}
+
+.theme-light .search-input {
+    background: var(--light-bg-secondary);
+    border-color: var(--light-border);
+    color: var(--light-text-primary);
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.theme-dark .search-input:focus {
+    border-color: var(--dark-accent);
+    box-shadow: 0 0 0 3px rgba(34, 131, 63, 0.1);
+}
+
+.theme-light .search-input:focus {
+    border-color: var(--light-accent);
+    box-shadow: 0 0 0 3px rgba(26, 127, 55, 0.1);
+}
+
+.search-input::placeholder {
+    color: inherit;
+    opacity: 0.5;
+}
+
+.search-clear {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.theme-dark .search-clear {
+    color: var(--dark-text-tertiary);
+}
+
+.theme-light .search-clear {
+    color: var(--light-text-tertiary);
+}
+
+.search-clear:hover {
+    opacity: 1;
+}
+
+.theme-dark .search-clear:hover {
+    background: var(--dark-bg-tertiary);
+    color: var(--dark-text-primary);
+}
+
+.theme-light .search-clear:hover {
+    background: var(--light-bg-tertiary);
+    color: var(--light-text-primary);
+}
+
+.search-clear svg {
+    width: 16px;
+    height: 16px;
+}

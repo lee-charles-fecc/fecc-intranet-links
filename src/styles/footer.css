@@ -1,0 +1,29 @@
+.footer {
+    position: relative;
+    z-index: 10;
+    border-top: 1px solid;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.theme-dark .footer {
+    border-top-color: var(--dark-border);
+}
+
+.theme-light .footer {
+    border-top-color: var(--light-border);
+}
+
+.footer-text {
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+.theme-dark .footer-text {
+    color: var(--dark-text-tertiary);
+}
+
+.theme-light .footer-text {
+    color: var(--light-text-tertiary);
+}
