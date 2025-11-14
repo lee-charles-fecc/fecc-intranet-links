@@ -2,7 +2,7 @@ export const INTRANET_LINKS = [
     {
         id: 1,
         name: "AirFlow Test",
-        url: `${process.env.REACT_APP_AIRFLOW_TEST}/test`,
+        url: `${process.env.REACT_APP_AIRFLOW_TEST}`,
         icon: `${process.env.REACT_APP_AIRFLOW_TEST}/static/pin_32.png`,
         description: "Workflow Management"
     },
