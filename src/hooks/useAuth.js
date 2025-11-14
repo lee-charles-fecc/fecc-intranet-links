@@ -10,6 +10,7 @@ export const useAuth = () => {
     // Check authentication status on mount
     useEffect(() => {
         checkAuth();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     function checkAuth() {
