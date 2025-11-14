@@ -12,7 +12,7 @@ export const useAuth = () => {
         checkAuth();
     }, []);
 
-    const checkAuth = () => {
+    function checkAuth() {
         try {
             const authData = localStorage.getItem(AUTH_KEY);
 
