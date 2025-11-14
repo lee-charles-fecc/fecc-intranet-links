@@ -1,23 +1,38 @@
-name: build-react
+name: Build and deploy React app to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
+          cache: "npm"
 
-      - name: Install deps
-        run: npm install
+      - name: Install dependencies
+        run: npm ci
 
       - name: Build React app
         env:
-          CI: false
           REACT_APP_USERNAME: ${{ secrets.REACT_APP_USERNAME }}
           REACT_APP_PASSWORD: ${{ secrets.REACT_APP_PASSWORD }}
           REACT_APP_AIRFLOW_TEST: ${{ secrets.REACT_APP_AIRFLOW_TEST }}
@@ -29,12 +44,24 @@ jobs:
           REACT_APP_SHAREPOINT: ${{ secrets.REACT_APP_SHAREPOINT }}
           REACT_APP_FIRST2PROJECT: ${{ secrets.REACT_APP_FIRST2PROJECT }}
           REACT_APP_IVUE: ${{ secrets.REACT_APP_IVUE }}
-          REACT_APP_HELP_DESK: ${{ secrets.REACT_APP_HELP_DESK }}
+          REACT_APP_HELP_DESK: ${{ secrets.REACT_DESK }}
           REACT_APP_VIRUS_TOTAL: ${{ secrets.REACT_APP_VIRUS_TOTAL }}
           REACT_APP_MIMECAST: ${{ secrets.REACT_APP_MIMECAST }}
         run: npm run build
 
-on:
-  push:
-    branches:
-      - master
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
