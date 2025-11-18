@@ -18,10 +18,6 @@ const Login = ({ onLogin }) => {
             const validUsername = process.env.REACT_APP_USERNAME;
             const validPassword = process.env.REACT_APP_PASSWORD;
 
-            console.log(`validUsername: ${validUsername}`);
-            console.log(`validPassword: ${validPassword}`);
-            console.log(process.env);
-
             if (username === validUsername && password === validPassword) {
                 onLogin();
             } else {
