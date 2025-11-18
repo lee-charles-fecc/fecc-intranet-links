@@ -56,28 +56,35 @@ export const INTRANET_LINKS = [
         description: "FECC Project Management"
     },
     {
-        id: 9,
+        id: 10,
+        name: "Open Project Test",
+        url: `${process.env.REACT_APP_FIRST2PROJECT_TEST}`,
+        icon: `${process.env.REACT_APP_FIRST2PROJECT_TEST}/custom_style/1724177103/favicon/favicon.ico`,
+        description: "FECC Project Management Test"
+    },
+    {
+        id: 11,
         name: "iVue",
         url: `${process.env.REACT_APP_IVUE}/#`,
         icon: `${process.env.REACT_APP_IVUE}/favicon.ico`,
         description: "FECC Time Keeper"
     },
     {
-        id: 10,
+        id: 12,
         name: "Help Desk",
         url: `${process.env.REACT_APP_HELP_DESK}/HomePage.do`,
         icon: `${process.env.REACT_APP_HELP_DESK}/images/favicon.ico?14600`,
         description: "FECC Help Desk"
     },
     {
-        id: 11,
+        id: 13,
         name: "Virus Total",
         url: `${process.env.REACT_APP_VIRUS_TOTAL}/home/upload`,
         icon: `${process.env.REACT_APP_VIRUS_TOTAL}/images/favicon.svg`,
         description: "Virus File Scanner"
     },
     {
-        id: 12,
+        id: 14,
         name: "Mimecast",
         url: `${process.env.REACT_APP_MIMECAST}/login/?gta=portal#/login`,
         icon: `${process.env.REACT_APP_MIMECAST}/assets/images/mpp_favicon.ico`,
