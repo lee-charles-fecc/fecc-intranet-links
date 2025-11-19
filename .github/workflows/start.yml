@@ -1,69 +1,53 @@
-name: Build and deploy React app to GitHub Pages
+name: Build Node + React app
 
 on:
   push:
     branches:
       - master
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    env:
+      # Auth (used by backend now; names unchanged)
+      REACT_APP_USERNAME: ${{ secrets.REACT_APP_USERNAME }}
+      REACT_APP_PASSWORD: ${{ secrets.REACT_APP_PASSWORD }}
+
+      # Frontend link URLs (used in React INTRANET_LINKS)
+      REACT_APP_AIRFLOW_TEST: ${{ secrets.REACT_APP_AIRFLOW_TEST }}
+      REACT_APP_AIRFLOW: ${{ secrets.REACT_APP_AIRFLOW }}
+      REACT_APP_DOCKER_REGISTRY: ${{ secrets.REACT_APP_DOCKER_REGISTRY }}
+      REACT_APP_GRAFANA: ${{ secrets.REACT_APP_GRAFANA }}
+      REACT_APP_FIRST2DATA: ${{ secrets.REACT_APP_FIRST2DATA }}
+      REACT_APP_FIRST2DATA_TEST: ${{ secrets.REACT_APP_FIRST2DATA_TEST }}
+      REACT_APP_SHAREPOINT: ${{ secrets.REACT_APP_SHAREPOINT }}
+      REACT_APP_FIRST2PROJECT: ${{ secrets.REACT_APP_FIRST2PROJECT }}
+      REACT_APP_FIRST2PROJECT_TEST: ${{ secrets.REACT_APP_FIRST2PROJECT_TEST }}
+      REACT_APP_IVUE: ${{ secrets.REACT_APP_IVUE }}
+      REACT_APP_HELP_DESK: ${{ secrets.REACT_APP_HELP_DESK }}
+      REACT_APP_VIRUS_TOTAL: ${{ secrets.REACT_APP_VIRUS_TOTAL }}
+      REACT_APP_MIMECAST: ${{ secrets.REACT_APP_MIMECAST }}
+
     steps:
       - name: Checkout repository
-        # pulls your repo code
         uses: actions/checkout@v4
 
       - name: Use Node.js
-        # IMPORTANT: no cache: "npm" here
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
       - name: Install dependencies
-        # IMPORTANT: npm install, not npm ci
         run: npm install
 
-      - name: Build React app
-        env:
-          REACT_APP_USERNAME: ${{ secrets.REACT_APP_USERNAME }}
-          REACT_APP_PASSWORD: ${{ secrets.REACT_APP_PASSWORD }}
-          REACT_APP_AIRFLOW_TEST: ${{ secrets.REACT_APP_AIRFLOW_TEST }}
-          REACT_APP_AIRFLOW: ${{ secrets.REACT_APP_AIRFLOW }}
-          REACT_APP_DOCKER_REGISTRY: ${{ secrets.REACT_APP_DOCKER_REGISTRY }}
-          REACT_APP_GRAFANA: ${{ secrets.REACT_APP_GRAFANA }}
-          REACT_APP_FIRST2DATA: ${{ secrets.REACT_APP_FIRST2DATA }}
-          REACT_APP_FIRST2DATA_TEST: ${{ secrets.REACT_APP_FIRST2DATA_TEST }}
-          REACT_APP_SHAREPOINT: ${{ secrets.REACT_APP_SHAREPOINT }}
-          REACT_APP_FIRST2PROJECT: ${{ secrets.REACT_APP_FIRST2PROJECT }}
-          REACT_APP_FIRST2PROJECT_TEST: ${{ secrets.REACT_APP_FIRST2PROJECT_TEST }}
-          REACT_APP_IVUE: ${{ secrets.REACT_APP_IVUE }}
-          REACT_APP_HELP_DESK: ${{ secrets.REACT_APP_HELP_DESK }}
-          REACT_APP_VIRUS_TOTAL: ${{ secrets.REACT_APP_VIRUS_TOTAL }}
-          REACT_APP_MIMECAST: ${{ secrets.REACT_APP_MIMECAST }}
+      - name: Build app
         run: npm run build
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      # Optional: publish dist as an artifact so we can grab it/deploy
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
         with:
-          path: ./build
+          name: build
+          path: build
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
