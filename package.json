@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "https://lee-charles-fecc.github.io/fecc-intranet-links",
   "dependencies": {
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1"
@@ -11,6 +13,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "serve": "node server.js",
+    "serve:dev": "nodemon server.js",
+
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -32,6 +37,7 @@
     ]
   },
   "devDependencies": {
+    "html-webpack-plugin": "^5.6.5",
     "nodemon": "^3.1.11",
     "webpack": "^5.102.1",
     "webpack-dev-server": "^5.2.2"
